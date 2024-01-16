@@ -13,7 +13,7 @@ Last updated 12/26/23 by M.Kachmar
 
 ```{r, setup, include=FALSE}
 
-knitr::opts_knit$set(root.dir = 'C:/Users/mariah.kachmar/Documents/Github/EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological')
+knitr::opts_knit$set(root.dir = 'C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological')
 
 
 install.packages("tidyverse")
@@ -32,7 +32,7 @@ library(ggplot2)
 ```{r}
 
 #### need to work on this chunk to read in all files at once - not ready to use
-#data_all <- list.files(path = "C:/Users/mariah.kachmar/Documents/Github/EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological",                                                               
+#data_all <- list.files(path = "C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological",                                                               
  # pattern = "*.xlsx", full.names = TRUE) %>%         # Identify all xlsx files
  # lapply(read_excel)                           # Store all files in list
 #
@@ -53,16 +53,16 @@ library(ggplot2)
 
 
 #June 2023
-shellsize <- read_excel("C:\\Users\\mariah.kachmar\\Documents\\Github\\EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_ShellSize.xlsx",
+shellsize <- read_excel("C:\\Users\\kyra.lenderman\\Documents\\Github\\KL_EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_ShellSize.xlsx",
                      sheet = 1, col_names = TRUE) 
 
-quadratdensity <- read_excel("C:\\Users\\mariah.kachmar\\Documents\\Github\\EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_QuadratDensity.xlsx",
+quadratdensity <- read_excel("C:\\Users\\kyra.lenderman\\Documents\\Github\\KL_EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_QuadratDensity.xlsx",
                      sheet = 1, col_names = TRUE) 
 
-rugosity <- read_excel("C:\\Users\\mariah.kachmar\\Documents\\Github\\EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_Rugosity.xlsx",
+rugosity <- read_excel("C:\\Users\\kyra.lenderman\\Documents\\Github\\KL_EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_Rugosity.xlsx",
                      sheet = 1, col_names = TRUE) 
 
-BedHeight <- read_excel("C:\\Users\\mariah.kachmar\\Documents\\Github\\EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_BedHeight.xlsx",
+BedHeight <- read_excel("C:\\Users\\kyra.lenderman\\Documents\\Github\\KL_EAD-ASEB_EPA_LISS_Disease_Surveillance\\Field_Data_Biological\\qry_2023-06_Survey_BedHeight.xlsx",
                      sheet = 1, col_names = TRUE) 
 ```
 
@@ -106,7 +106,7 @@ shellsize <- shellsize %>% select("Date_collected", "Site", "State", "Quadrat", 
 
 
 
-length_all <- list.files(path = "C:/Users/mariah.kachmar/Documents/Github/EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Length",                           # Identify all CSV files
+length_all <- list.files(path = "C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Length",                           # Identify all CSV files
   pattern = "*.xlsx", full.names = TRUE) %>% 
   lapply(read_excel) %>%    # Store all files in list
   bind_rows 
@@ -163,7 +163,7 @@ Height_master
 Height_master<-na.omit(Height_master)
 
 # Output to repository
-write.csv(Height_master, "C:/Users/mariah.kachmar/Documents/Github/EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Output/Height_master.csv", row.names=FALSE)
+write.csv(Height_master, "C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Output/Height_master.csv", row.names=FALSE)
 
 ```
 #Oyster density metrics
@@ -189,7 +189,7 @@ all_density_SE$PSE_all <- 100*(all_density_SE$se/all_density_SE$Count)
 densitysummary
 
 
-write.csv(densitysummary, "C:/Users/mariah.kachmar/Documents/Github/EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Output/populationdensity_summary.csv", row.names=FALSE)
+write.csv(densitysummary, "C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Output/populationdensity_summary.csv", row.names=FALSE)
 
 ```
 #oyster size distribution
@@ -204,7 +204,7 @@ shellsize_all <-
     max_height=max(Height, na.rm = TRUE), 
     Q1=quantile(Height,probs = 0.25, na.rm = TRUE),
     Q3=quantile(Height,probs = 0.75, na.rm = TRUE))%>%
-  mutate(Survial_status = "All")
+  mutate(Survival_status = "All")
 shellsize_all
 
 shellsize_live <- 
@@ -245,7 +245,7 @@ shellsize_summary
 
 #size distribution summary
 #note that calculating PSE and accuracy do not make sense for size distributions. Will need to figure out new metrics for the QAPP
-write.csv(shellsize_summary, "C:/Users/mariah.kachmar/Documents/Github/EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Output/shellsize_summary.csv", row.names=FALSE)
+write.csv(shellsize_summary, "C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Field_Data_Biological/Output/shellsize_summary.csv", row.names=FALSE)
 ```
 
 #graphing shell height all sites
