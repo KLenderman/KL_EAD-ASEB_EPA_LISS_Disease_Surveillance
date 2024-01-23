@@ -1,0 +1,63 @@
+---
+title: "Tissue_ASHCsizestudy"
+author: "Kyra Lenderman"
+date: "2024-01-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("dplyr")                                    
+library("plyr")                                     
+library("readr")             
+library("Rmisc")
+library("ggplot2")
+library("lubridate")
+
+#Set Path
+setwd("C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Size_studyASHC/raw_data")
+
+data_all <- read.csv("C:/Users/kyra.lenderman/Documents/Github/KL_EAD-ASEB_EPA_LISS_Disease_Surveillance/Size_studyASHC/raw_data/SizeASHC_TissueProcessing.csv")
+str(data_all)
+head(data_all)
+```
+
+
+```{r}
+p <- ggplot(data=data_all, aes(fill=condition, x=height_mm, y=lab_sample )) + geom_point()
+p
+
+b <- ggplot(data=data_all, aes(fill=condition, x=lab_sample, y=height_mm)) + geom_bar(position = "stack",stat = "identity")
+b
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+sessionInfo()
+```
+
