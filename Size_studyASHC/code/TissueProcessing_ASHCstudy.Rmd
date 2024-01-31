@@ -19,6 +19,7 @@ library("lubridate")
 library("tidyverse")
 library("broom")
 library("AICcmodavg")
+library("rstatix")
 
 
 #Set Path
@@ -92,6 +93,10 @@ b+scale_fill_brewer(palette="Dark2")
 
 
 
+```{r}
+w <- ggplot(data, aes(x=height_mm, y=condition, fill=condition)) + geom_boxplot()
+
+```
 
 
 
