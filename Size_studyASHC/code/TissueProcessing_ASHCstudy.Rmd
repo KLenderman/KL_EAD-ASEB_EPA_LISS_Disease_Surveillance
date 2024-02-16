@@ -38,16 +38,34 @@ data <- g %>%  filter(!row_number() %in% c(61:998))
 data
 summary(data)
 ```
+```{r}
+#Creating size_class column
+newdf <- data %>%
+  mutate(sizeclass = case_when(height_mm < 81 ~ 'small',
+                           height_mm < 121 ~ 'med',
+                           height_mm > 120 ~ 'large'))
+
+ggplot(newdf, aes(x=condition, y=height_mm))+
+  geom_bar(stat = 'identity')+
+  facet_wrap(~sizeclass, ncol = 1)
+
+ggplot(newdf, aes())
+
+```
 
 
 ```{r}
 #One-way ANOVA test
 one.way<- aov(height_mm~condition, data = data)
 summary(one.way)  #p-value=0.544
+
+one.way<- aov(condition~sizeclass, data = newdf)
+one.way<- aov(condition~rftm_final, data = data)
+
 ```
 
 ```{r}
-height_charac <- as.character(data$height_mm)
+#height_charac <- as.character(data$height_mm)
 
 ```
 
@@ -55,7 +73,7 @@ height_charac <- as.character(data$height_mm)
 
 ```{r}
 #Create bins for class sizes
-data%>% mutate(new_bin = cut(height_mm, breaks = c(80,120)))
+#data%>% mutate(new_bin = cut(height_mm, breaks = c(80,120)))
 
 data<- data %>%
   mutate(condition_score = recode(condition, 
@@ -86,7 +104,8 @@ sp.f + stat_cor(aes(color = condition, label = paste(after_stat(rr.label))), lab
 
 #Box and whisker plot for height vs. condition
 b <- ggplot(data, aes(x=height_mm, y=condition, fill=condition)) + geom_boxplot()
-b+scale_fill_brewer(palette="Dark2")
+b+scale_fill_brewer(palette="Dark2")+coord_flip()
+
 
 ```
 
@@ -94,7 +113,13 @@ b+scale_fill_brewer(palette="Dark2")
 
 
 ```{r}
-w <- ggplot(data, aes(x=height_mm, y=condition, fill=condition)) + geom_boxplot()
+w <- ggplot(data, aes(x=condition, y=rftm_final, fill=condition)) + geom_boxplot()
+w
+
+height_bin <- cut(data$height_mm, c(40,80,120,180))
+ggplot(data, aes(x=height_bin, y= rftm_final, fill=height_bin)) + geom_boxplot()
+
+ggplot(data, aes(x=height_bin, y= rftm_final, fill=height_bin)) + geom_boxplot()
 
 ```
 
